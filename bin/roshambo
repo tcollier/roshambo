@@ -1,0 +1,3 @@
+#!/usr/bin/env ruby
+require 'roshambo'
+Roshambo::Dojo.from_command_line_args(ARGV).fight
