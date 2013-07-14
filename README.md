@@ -1,6 +1,6 @@
 # Roshambo
 
-TODO: Write a gem description
+An bot vs. bot roshambo dojo 
 
 ## Installation
 
@@ -18,7 +18,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    % irb
+    > require 'roshambo'
+    > require '<your bot code>'
+    > dojo = Roshambo::Dojo.new(Your::Bot::Class.new [, Other::Bot::Class.new])
+    > dojo.fight
 
 ## Contributing
 
