@@ -10,6 +10,10 @@ module Roshambo
           @mine   = mine
           @theirs = theirs
         end
+
+        def ==(other)
+          mine == other.mine && theirs == other.theirs
+        end
       end
 
       attr_accessor :rounds
