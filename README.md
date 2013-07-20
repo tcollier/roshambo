@@ -6,15 +6,11 @@ An bot vs. bot roshambo dojo
 
 Add this line to your application's Gemfile:
 
-    gem 'roshambo'
+    gem 'roshambo', :git => "git@github.com:tcollier/roshambo.git"
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install roshambo
 
 ## Usage
 
