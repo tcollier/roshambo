@@ -54,6 +54,17 @@ Your bot class can also inherit from `Roshabo::Competitor::Player` and just
 implement `throw`. By doing this, the match history is maintained for you if
 you want to access it for decision making purposes.
 
+## Built-in bots
+
+There are several built-in bots for testing purposes
+
+* `Roshambo::Competitor::Cycler` - starts with random throw, then cycles through all throws on repeat
+* `Roshambo::Competitor::Cutter` - always throws `:scissors`
+* `Roshambo::Competitor::PaperDoll` - always throws `:paper`
+* `Roshambo::Competitor::Rocky` - always throw `:rock`
+* `Roshambo::Competitor::SpazmanianDevil` - chooses its throws randomly
+
+
 ## Contributing
 
 1. Fork it
