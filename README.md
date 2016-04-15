@@ -1,30 +1,45 @@
 # Roshambo
 
-An bot vs. bot roshambo dojo 
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'roshambo', :git => "git@github.com:tcollier/roshambo.git"
-
-And then execute:
-
-    $ bundle
+A bot vs. bot roshambo dojo
 
 ## Usage
 
-    % irb
-    > require 'roshambo'
-    > require '<your bot code>'
-    > dojo = Roshambo::Dojo.new(Your::Bot::Class.new [, Other::Bot::Class.new])
-    > dojo.fight
+```bash
+cd /tmp
+git clone git@github.com:tcollier/roshambo.git
+cd roshambo
+```
+
+Now add your bot gem to Gemfile (see the example roshambot gem)
+
+```ruby
+# Gemfile
+gem '<gem name>', git: 'https://github.com/<username>/<gem name>.git'
+```
+
+And include the code in the externals include file
+
+```ruby
+# lib/roshambo/competitor/externals.rb
+require '<gem name>'
+```
+
+Now we're ready to ruuuuuummmmmmmbblllleeee
+```bash
+bundle
+./bin/roshambo <your bot class>
+# e.g.
+# ./bin/roshambo Roshambot::Tominator
+#
+# Alternatively you can specify a second competitor
+# ./bin/roshambo Roshambot::Tominator Roshambo::Competitor::SpazmanianDevil
+```
 
 ## Create your own bot
 
 A bot must respond to three different method calls
 
-1. `reset(seed)`  - called before the match starts, seed is a random number
+1. `reset!(seed)`  - called before the match starts, seed is a random number
 between 0 and 1
 2. `throw` - must return one of: :rock, :paper, :scissors. This method call
 will be interrupted if it takes longer than
