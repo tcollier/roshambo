@@ -11,7 +11,7 @@ module Roshambo
       @competitor1 = competitor1
       @competitor2 = competitor2
       @output = output
-      seed = (Time.now.to_f * 100000000).truncate % 0x10000
+      seed = Time.now.to_f.divmod(1).last
       output.puts "Starting match with seed: #{seed}"
       competitor1.reset!(seed)
       competitor2.reset!(seed)
