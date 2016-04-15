@@ -6,9 +6,12 @@ require "roshambo/competitor"
 require "roshambo/competitor/history"
 require "roshambo/competitor/player"
 require "roshambo/competitor/cutter"
+require "roshambo/competitor/cycler"
 require "roshambo/competitor/paper_doll"
 require "roshambo/competitor/rocky"
 require "roshambo/competitor/spazmanian_devil"
+
+require "roshambo/competitor/externals"
 
 module Roshambo
   # Your code goes here...

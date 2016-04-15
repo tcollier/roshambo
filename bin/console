@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+
 require 'bundler/setup'
+require 'pry'
 require 'roshambo'
-Roshambo::Dojo.start_from_command_line_args(ARGV)
+
+Pry.start

@@ -7,7 +7,7 @@ module Roshambo
         @history = History.new
       end
 
-      def reset(seed)
+      def reset!(seed)
         @seed = seed
         history.reset
       end

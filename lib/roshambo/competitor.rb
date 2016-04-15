@@ -1,7 +1,7 @@
 module Roshambo
   module Competitor
     def self.random
-      [Cutter, PaperDoll, SpazmanianDevil, Rocky].sample.new
+      [Cutter, Cycler, PaperDoll, SpazmanianDevil, Rocky].sample.new
     end
 
     def self.class_from_string(str)

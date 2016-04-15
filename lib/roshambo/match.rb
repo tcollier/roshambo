@@ -11,15 +11,16 @@ module Roshambo
       @competitor1 = competitor1
       @competitor2 = competitor2
       @output = output
-      seed = rand
-      competitor1.reset(seed)
-      competitor2.reset(seed)
+      seed = (Time.now.to_f * 100000000).truncate % 0x10000
+      output.puts "Starting match with seed: #{seed}"
+      competitor1.reset!(seed)
+      competitor2.reset!(seed)
     end
 
-    def fight(num_throws_to_win)
+    def fight(num_throws)
       print_header
-      score_card = ScoreCard.new(competitor1, competitor2, num_throws_to_win)
-      while !score_card.complete
+      score_card = ScoreCard.new(competitor1, competitor2, num_throws)
+      num_throws.times do
         score_card.tally execute_throw
       end
       score_card.winner
@@ -41,7 +42,7 @@ module Roshambo
         competitor.throw
       end
     rescue
-      nil
+      :timeout
     end
 
     def determine_winner(throw1, throw2)

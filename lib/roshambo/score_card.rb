@@ -24,9 +24,9 @@ module Roshambo
     end
 
     def winner
-      if @card[0] >= wins_needed
+      if @card[0] > @card[1]
         competitor1
-      elsif @card[1] >= wins_needed
+      elsif @card[1] > @card[2]
         competitor2
       end
     end
