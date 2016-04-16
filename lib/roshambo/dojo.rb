@@ -36,7 +36,10 @@ module Roshambo
     end
 
     def self.load_competitor(class_name)
-      competitor = const_get(class_name).new
+      competitor_class = const_get(class_name)
+      competitor = competitor_class.new
+      competitor_class.include(DefaultName) unless competitor.respond_to?(:name)
+      competitor
     rescue NameError
       puts "Unrecognized class: #{class_name}, did you add it to the Gemfile and external competitors include?"
       puts ""
@@ -62,6 +65,13 @@ module Roshambo
     end
 
   private
+    module DefaultName
+      def name
+        self.class.name
+      end
+    end
+    private_constant :DefaultName
+
     def print_match_winner(winner, match_num)
       output.puts
       if winner
