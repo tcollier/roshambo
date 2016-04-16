@@ -1,0 +1,63 @@
+#!/usr/bin/env ruby
+require 'bundler/setup'
+require 'roshambo'
+
+devils = Array.new(2) do |i|
+  Roshambo::Competitor::SpazmanianDevil.new.tap do |devil|
+    # Set up different names to tell the competitors apart
+    devil.define_singleton_method :name, -> { "Devil #{i}" }
+    # Different random seeds so they don't draw
+    devil.reset!(Random.new_seed)
+    # Prevent Match from setting the same seed
+    devil.define_singleton_method :reset!, ->(_seed) {}
+  end
+end
+
+class ScoreCollector
+  attr_accessor :scores
+
+  def initialize
+    @scores = Hash.new(0)
+  end
+
+  def record(*new_lines)
+    new_lines.each do |line|
+      if line =~ /Match \d+ was a draw/
+        scores['draw'] += 1
+      elsif line =~ /(.*) won match \d+/
+        scores[$1] += 1
+      end
+    end
+  end
+
+  alias_method :printf, :record
+  alias_method :puts,   :record
+  alias_method :write,  :record
+
+  def percent(n)
+    (100.0 * n / rounds).round(1).to_s + '%'
+  end
+
+  def rounds
+    scores.values.inject(:+)
+  end
+
+  def to_s
+    scores.sort_by(&:first).map do |(label, wins)|
+      [label, wins, percent(wins)].join("\t|\t")
+    end
+  end
+end
+
+def run(competitors)
+  scoreboard = ScoreCollector.new
+  dojo = Roshambo::Dojo.new(*competitors, scoreboard)
+  dojo.fight((ARGV[0] || 1000).to_i)
+  puts scoreboard.to_s
+end
+
+puts "### Running competitors in order (#{devils.map(&:name).join(', ')})"
+run(devils)
+
+puts nil, "### Reversing competitor order (#{devils.reverse.map(&:name).join(', ')})"
+run(devils.reverse)
